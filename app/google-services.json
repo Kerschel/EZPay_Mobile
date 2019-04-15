@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "433718443938",
+    "firebase_url": "https://ezpay-c9127.firebaseio.com",
+    "project_id": "ezpay-c9127",
+    "storage_bucket": "ezpay-c9127.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:433718443938:android:9192ddf89fe456aa",
+        "android_client_info": {
+          "package_name": "com.example.kersc.ezpay"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "433718443938-s3tkqh6scev3ca7br1shpgrq8q5803qd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.kersc.ezpay",
+            "certificate_hash": "7ae1adfcf568351a3b2181aedae60105cc10a0e1"
+          }
+        },
+        {
+          "client_id": "433718443938-fbt22r1rd2pmhu41fgf2cko917vhvod4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdtO7F4WX5VYIo2yKpOrUnBtnMYS0TrfA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "433718443938-fbt22r1rd2pmhu41fgf2cko917vhvod4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

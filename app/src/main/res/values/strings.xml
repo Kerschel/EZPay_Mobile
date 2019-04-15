@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">EZPay</string>
+    <string name="enter_email">Enter email</string>
+    <string name="enter_password">Enter password</string>
+    <string name="featured">Featured Services</string>
+    <string name="browse">Browse Category</string>
+    <string name="register">Registration</string>
+    <string name="registerbtn">Register</string>
+
+
+    <string name="usernameReg">Full Name</string>
+    <string name="emailReg">Email</string>
+    <string name="passwordReg">Password</string>
+    <string name="sign_upReg">Sign up</string>
+    <string name="sign_inLog">Sign in</string>
+    <string name="signin_redirect">Already a member? Sign in!</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="signup_redirect">Don\'t have an account? Register here!</string>
+
+</resources>
