@@ -16,49 +16,53 @@ import com.google.zxing.integration.android.IntentResult;
 
 public class HomeScreen extends AppCompatActivity {
     ViewFlipper imgBanner;
-    Button scan_btn;
+    Button shop,history;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
-        scan_btn = (Button) findViewById(R.id.scanner);
+        shop = (Button) findViewById(R.id.shop);
+        history = (Button) findViewById(R.id.history);
         final Activity activity = this;
 
-        scan_btn.setOnClickListener(new View.OnClickListener() {
+        shop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(HomeScreen.this, Products.class);
+                startActivity(intent);
+            }
+        });
 
-                IntentIntegrator integrator = new IntentIntegrator(activity);
-                integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
-                integrator.setPrompt("Scan Product");
-                integrator.setCameraId(0);
-                integrator.setBeepEnabled(false);
-                integrator.initiateScan();
+        history.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeScreen.this, History.class);
+                startActivity(intent);
             }
         });
 
         imgBanner = findViewById(R.id.imgBanner);
 
         int sliders[] = {
-                R.drawable.female,R.drawable.male
+                R.drawable.menu1,R.drawable.menu2,R.drawable.menu3,R.drawable.menu4
         };
 
-//        for (int slide:sliders){
-//            bannerFlipper(slide);
-//        }
+        for (int slide:sliders){
+            bannerFlipper(slide);
+        }
 
 
     }
 
-//    public void bannerFlipper(int image){
-//        ImageView imageview = new ImageView(this);
-//        imageview.setImageResource(image);
-//        imgBanner.addView(imageview);
-//        imgBanner.setFlipInterval(5000);
-//        imgBanner.setAutoStart(true);
-//        imgBanner.setInAnimation(this,android.R.anim.fade_in);
-//        imgBanner.setOutAnimation(this,android.R.anim.fade_out);
-//    }
+    public void bannerFlipper(int image){
+        ImageView imageview = new ImageView(this);
+        imageview.setImageResource(image);
+        imgBanner.addView(imageview);
+        imgBanner.setFlipInterval(2000);
+        imgBanner.setAutoStart(true);
+        imgBanner.setInAnimation(this,android.R.anim.fade_in);
+        imgBanner.setOutAnimation(this,android.R.anim.fade_out);
+    }
 
 
 }

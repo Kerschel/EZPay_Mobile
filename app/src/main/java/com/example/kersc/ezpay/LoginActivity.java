@@ -20,7 +20,6 @@ public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "";
     Button loginAccount,register;
     AutoCompleteTextView userEmail, userPW;
-    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
         register =(Button)findViewById(R.id.btnRegister);
         userEmail = findViewById(R.id.atvEmailLog);
         userPW = findViewById(R.id.atvPasswordLog);
-        mAuth = FirebaseAuth.getInstance();
+        Register.mAuth = FirebaseAuth.getInstance();
 
 
 //Login Account
@@ -40,12 +39,12 @@ public class LoginActivity extends AppCompatActivity {
                 String mail = userEmail.getText().toString();
                 String pass = userPW.getText().toString();
 
-                mAuth.signInWithEmailAndPassword(mail, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                Register.mAuth.signInWithEmailAndPassword(mail, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            Intent intent = new Intent(LoginActivity.this, Products.class);
+                            FirebaseUser user = Register.mAuth.getCurrentUser();
+                            Intent intent = new Intent(LoginActivity.this, HomeScreen.class);
                             startActivity(intent);
                         } else {
                             Toast.makeText(LoginActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
@@ -66,17 +65,15 @@ public class LoginActivity extends AppCompatActivity {
             }
         });// the click
 
-
-
     }
     @Override
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        Toast.makeText(LoginActivity.this, "You are logged in.", Toast.LENGTH_SHORT).show();
-        System.out.print(currentUser);
-        Intent intent = new Intent(LoginActivity.this, Products.class);
-        startActivity(intent);
+//        FirebaseUser currentUser = mAuth.getCurrentUser();
+//        Toast.makeText(LoginActivity.this, "You are logged in.", Toast.LENGTH_SHORT).show();
+//        System.out.print(currentUser);
+//        Intent intent = new Intent(LoginActivity.this, Products.class);
+//        startActivity(intent);
     }
 }

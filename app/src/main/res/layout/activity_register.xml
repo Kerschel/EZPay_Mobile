@@ -19,21 +19,26 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             android:layout_marginStart="50dp"
             android:layout_marginEnd="50dp"
             >
-
+            <ImageView
+                android:layout_width="145dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center_horizontal|center"
+                android:layout_marginTop="18dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ezpay" />
 
             <ImageView
-                android:id="@+id/ivRegLogo"
-                android:layout_width="match_parent"
-                android:layout_height="160dp"
-
-                android:layout_marginBottom="55dp"
+                android:id="@+id/ivLogLogo"
+                android:layout_width="145dp"
+                android:layout_height="340dp"
+                android:layout_gravity="center_horizontal|center"
                 android:layout_marginTop="18dp"
-                android:contentDescription="TODO"
+                android:layout_marginBottom="55dp"
                 android:scaleType="fitCenter"
                 android:src="@drawable/logo" />
 

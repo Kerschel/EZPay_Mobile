@@ -19,10 +19,21 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
 public class Register extends AppCompatActivity {
     AutoCompleteTextView email,password,fullname;
     Button register;
-    private FirebaseAuth mAuth;
+    public static FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,49 +52,53 @@ public class Register extends AppCompatActivity {
                 final String pass = password.getText().toString().trim();
                 final String name = fullname.getText().toString().trim();
 // Write a message to the database
-
-                System.out.println("Data is here" + address);
-System.out.println(pass);
-System.out.print(address + "address");
-                mAuth.createUserWithEmailAndPassword(address, pass)
-                        .addOnCompleteListener( new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    // Sign in success, update UI with the signed-in user's information
-                                    Log.d("User", "createUserWithEmail:success");
-                                    FirebaseUser user = mAuth.getCurrentUser();
-                                    User u= new User(name,address);
-                                    FirebaseDatabase.getInstance().getReference("Users")
-                                            .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                            .setValue(u).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if(task.isSuccessful()){
-                                                Toast.makeText(Register.this, "User Successfully created",Toast.LENGTH_SHORT).show();
-                                                FirebaseUser currentUser = mAuth.getCurrentUser();
-                                                Intent intent = new Intent(Register.this, HomeScreen.class);
-                                                startActivity(intent);
-                                            }
-                                            else{
-                                                Toast.makeText(Register.this, "Registration Failed",Toast.LENGTH_SHORT).show();
-                                            }
-                                        }
-                                    });
-                                } else {
-                                    // If sign in fails, display a message to the user.
-//                                    Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                                    Toast.makeText(Register.this, "Authentication failed.",
-                                            Toast.LENGTH_SHORT).show();
-                                }
-
-                            }
-                        });
-
+                Register(address,pass,name);
             }
         });
 
     }
 
 
+
+    public void Register(final String email, final String password, String name){
+        OkHttpClient client = new OkHttpClient();
+        String url = "https://us-central1-ezpay-c9127.cloudfunctions.net/createNewCustomer?email="+email+"&password="+password+"&username="+name;
+
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    Register.this.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(Register.this, "Please wait while we sign you in", Toast.LENGTH_LONG).show();
+
+                            mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        Intent intent = new Intent(Register.this, HomeScreen.class);
+                                        startActivity(intent);
+                                    } else {
+                                        Toast.makeText(Register.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                                    }
+
+                                }
+                            });
+
+                        }
+                    });
+                }
+            }
+        });
+    }
 }

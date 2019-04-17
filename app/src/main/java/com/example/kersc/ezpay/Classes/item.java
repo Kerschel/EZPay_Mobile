@@ -1,5 +1,7 @@
 package com.example.kersc.ezpay.Classes;
 
+import android.graphics.drawable.Drawable;
+
 public class item {
     private String name;
     private String category;
@@ -8,8 +10,10 @@ public class item {
     private String barcode;
     private String seller_paypalID;
     private String location;
+    private Drawable image;
 
-    public item(String name, String category, String price, String description, String barcode, String seller_paypalID, String location) {
+
+    public item(Drawable image, String category, String price, String description, String barcode, String seller_paypalID, String location) {
         this.name = name;
         this.category = category;
         this.price = price;
@@ -17,6 +21,15 @@ public class item {
         this.barcode = barcode;
         this.seller_paypalID = seller_paypalID;
         this.location = location;
+        this.image  = image;
+    }
+
+    public Drawable getImage() {
+        return image;
+    }
+
+    public void setImage(Drawable image) {
+        this.image = image;
     }
 
     public String getLocation() {
