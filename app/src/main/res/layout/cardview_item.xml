@@ -3,7 +3,7 @@
     android:layout_width="180dp"
     android:clickable="true"
     android:foreground="?android:attr/selectableItemBackground"
-    android:layout_height="280dp"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="5dp"
     app:cardCornerRadius="4dp">
@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textSize="13sp"
-            android:text="describe"/>
+            android:text="title"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

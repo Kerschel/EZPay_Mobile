@@ -7,7 +7,9 @@
     android:background="@mipmap/background"
 
     tools:context=".HomeScreen">
-
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -20,22 +22,23 @@
             android:layout_marginTop="18dp"
             android:scaleType="fitCenter"
             android:src="@drawable/ezpay" />
+
         <ViewFlipper
-            android:layout_marginTop="15dp"
-            android:layout_margin="20dp"
             android:id="@+id/imgBanner"
             android:layout_width="wrap_content"
-            android:layout_height="250dp"></ViewFlipper>
+            android:layout_height="250dp"
+            android:layout_margin="20dp"
+            android:layout_marginTop="15dp"></ViewFlipper>
 
 
         <Button
             android:id="@+id/shop"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center"
             android:layout_marginTop="50dp"
             android:background="@drawable/btnsignup_gradient"
             android:text="@string/shop"
-            android:layout_gravity="center_horizontal|center"
 
             android:textColor="#FFFFFF" />
 
@@ -43,28 +46,27 @@
             android:id="@+id/window"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center"
             android:layout_marginTop="30dp"
             android:background="@drawable/store_gradient"
             android:text="@string/stores"
-            android:layout_gravity="center_horizontal|center"
 
             android:textColor="#FFFFFF" />
 
 
         <Button
-            android:layout_gravity="center_horizontal|center"
-
             android:id="@+id/history"
+
             android:layout_width="250dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center"
             android:layout_marginTop="30dp"
             android:background="@drawable/btnsignin_gradient"
             android:text="@string/history"
             android:textColor="#FFFFFF" />
 
-
-
     </LinearLayout>
+    </ScrollView>
 
 
 </LinearLayout>

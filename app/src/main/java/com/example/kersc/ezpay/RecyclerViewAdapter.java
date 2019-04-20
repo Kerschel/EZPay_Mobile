@@ -47,7 +47,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int i) {
-        holder.priceValue.setText(barcodes.get(i).getPrice());
+        holder.priceValue.setText("$"+barcodes.get(i).getPrice());
         holder.description.setText(barcodes.get(i).getDescription());
 //        holder.icon.setImageResource(getResource(barcodes.get(i).getCategory().toLowerCase()));
         holder.location.setText(barcodes.get(i).getLocation());
@@ -103,12 +103,5 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         }
     }
 
-    public int getResource(String category){
-        if(category.equals("food"))
-            return R.drawable.food;
-        else
-        if(category.equals("icecream"))
-            return R.drawable.ice;
-        return 0;
-    }
+
 }

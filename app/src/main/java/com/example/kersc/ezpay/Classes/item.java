@@ -11,7 +11,24 @@ public class item {
     private String seller_paypalID;
     private String location;
     private Drawable image;
+    private String title;
 
+    public item( String description, String barcode, String seller_paypalID,String price, String title,Drawable image) {
+        this.price = price;
+        this.description = description;
+        this.barcode = barcode;
+        this.seller_paypalID = seller_paypalID;
+        this.image = image;
+        this.title = title;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
     public item(Drawable image, String category, String price, String description, String barcode, String seller_paypalID, String location) {
         this.name = name;

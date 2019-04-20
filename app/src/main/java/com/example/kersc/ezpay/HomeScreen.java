@@ -16,13 +16,14 @@ import com.google.zxing.integration.android.IntentResult;
 
 public class HomeScreen extends AppCompatActivity {
     ViewFlipper imgBanner;
-    Button shop,history;
+    Button shop,history,window;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
         shop = (Button) findViewById(R.id.shop);
         history = (Button) findViewById(R.id.history);
+        window = findViewById(R.id.window);
         final Activity activity = this;
 
         shop.setOnClickListener(new View.OnClickListener() {
@@ -32,6 +33,15 @@ public class HomeScreen extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        window.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeScreen.this, StorePage.class);
+                startActivity(intent);
+            }
+        });
+
 
         history.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,7 +54,7 @@ public class HomeScreen extends AppCompatActivity {
         imgBanner = findViewById(R.id.imgBanner);
 
         int sliders[] = {
-                R.drawable.menu1,R.drawable.menu2,R.drawable.menu3,R.drawable.menu4
+                R.drawable.menu1,R.drawable.menu2,R.drawable.menu3,R.drawable.menu4,R.drawable.menu5
         };
 
         for (int slide:sliders){

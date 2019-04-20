@@ -56,6 +56,7 @@ public class Products extends AppCompatActivity {
     RecyclerViewAdapter myAdapter;
     private  String userID;
     public item i;
+    public int removeitem=0;
 
     private static PayPalConfiguration config = new PayPalConfiguration()
 
@@ -107,7 +108,7 @@ public class Products extends AppCompatActivity {
                         .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)
 
                         .clientId("AZEqnKfo2CTPnlclHsFR2byFAtra_h6rTJmcXr7HgdLhhdiNj0DKJiquRx8HUgu08n16BaUj9DuLGZXz");
-                paypalPayment(i.getDescription(),i.getPrice());
+                paypalPayment(i.getDescription(),i.getPrice(),position);
 
             }
 
@@ -126,7 +127,7 @@ public class Products extends AppCompatActivity {
 
     public void getBarcode(final String barcode){
         OkHttpClient client = new OkHttpClient();
-        String url = "https://us-central1-ezpay-c9127.cloudfunctions.net/getBarcodeDetails?barcodeId="+barcode;
+        String url = "https://us-central1-ezpay-c9127.cloudfunctions.net/getInvoiceDetails?invoiceId="+barcode;
 
         Request request = new Request.Builder()
                 .url(url)
@@ -142,6 +143,7 @@ public class Products extends AppCompatActivity {
             public void onResponse(Call call, Response response) throws IOException {
                 if (response.isSuccessful()) {
                     final String myResponse = response.body().string();
+                    Log.i("failures",myResponse);
 
                     Products.this.runOnUiThread(new Runnable() {
                         @Override
@@ -153,7 +155,7 @@ public class Products extends AppCompatActivity {
                                 String description =  Jobject.get("title").toString();
                                 String location =  Jobject.get("location").toString();
                                 String price =  Jobject.get("price").toString();
-                                String url = Jobject.get("url").toString();
+                                String url = Jobject.get("imgUrl").toString();
                                 Log.i("URL",url);
                                 RetrieveFeedTask r = new RetrieveFeedTask();
                                 Drawable image =r.execute(url).get();
@@ -178,10 +180,10 @@ public class Products extends AppCompatActivity {
         });
     }
 
-    public void logTransaction(String barcode,String customer){
+    public void logTransaction(String barcode,String customer,String status){
 
         OkHttpClient client = new OkHttpClient();
-        String url = "https://us-central1-ezpay-c9127.cloudfunctions.net/makePurchase?barcodeNumber="+"&customerId="+customer;
+        String url = "https://us-central1-ezpay-c9127.cloudfunctions.net/addTransaction?invoiceId="+barcode+"&customerId="+customer+"&status="+status+"&customerName="+Register.mAuth.getCurrentUser().getDisplayName();
 
         Request request = new Request.Builder()
                 .url(url)
@@ -202,13 +204,14 @@ public class Products extends AppCompatActivity {
         });
     }
 
-    public void paypalPayment(String description,String price){
+    public void paypalPayment(String description, String price,int remove){
         // PAYMENT_INTENT_SALE will cause the payment to complete immediately.
         // Change PAYMENT_INTENT_SALE to
         //   - PAYMENT_INTENT_AUTHORIZE to only authorize payment and capture funds later.
         //   - PAYMENT_INTENT_ORDER to create a payment for authorization and capture
         //     later via calls from your server.
 
+        removeitem = remove;
         PayPalPayment payment = new PayPalPayment(new BigDecimal(price.replace("$","")), "USD", description,
                 PayPalPayment.PAYMENT_INTENT_SALE);
 
@@ -241,9 +244,10 @@ public class Products extends AppCompatActivity {
                     // see https://developer.paypal.com/webapps/developer/docs/integration/mobile/verify-mobile-payment/
                     // for more details.
                     String user = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-
+                    itemList.remove(removeitem);
+                    myAdapter.notifyDataSetChanged();
 //                    Transaction t = new Transaction(user,i.getCategory(),i.getPrice(),i.getBarcode(),i.getSeller_paypalID());
-                    logTransaction(i.getBarcode(),Register.mAuth.getCurrentUser().getUid());
+                    logTransaction(i.getBarcode(),Register.mAuth.getCurrentUser().getUid(),"1");
                 }
             }
             else if (resultCode == Activity.RESULT_CANCELED) {

@@ -23,8 +23,10 @@
         <activity
             android:name=".Products"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".History"></activity>
+            android:screenOrientation="portrait" />
+        <activity android:name=".History" />
+        <activity android:name=".StorePage" />
+        <activity android:name=".BuyFromStore"></activity>
     </application>
 
 </manifest>

@@ -4,7 +4,6 @@
 
     <rotate
         android:interpolator="@android:anim/accelerate_decelerate_interpolator"
-        android:duration="3000"
         android:fromDegrees="0"
         android:toDegrees="360"
         android:pivotX="50%"

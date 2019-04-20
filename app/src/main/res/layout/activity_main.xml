@@ -19,7 +19,7 @@
             android:layout_height="200dp"
             android:layout_gravity="center"
             android:layout_marginTop="100sp"
-            android:src="@drawable/icon" />
+            />
 
         <TextView
             android:layout_width="match_parent"
